@@ -21,6 +21,7 @@ public class ArraysCompareTest {
         Arrays.sort(numbers);
     }
 
+    @Test(timeout = 100) // use timeout to control performance
     public void testSort_Performance() {
         int[] array = {4,6,77,8,10,3,5,85,91};
         for (int i = 1; i <= 1000000; i++){
