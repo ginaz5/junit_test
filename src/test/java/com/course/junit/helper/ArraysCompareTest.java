@@ -20,4 +20,13 @@ public class ArraysCompareTest {
         int[] numbers = null;
         Arrays.sort(numbers);
     }
+
+    public void testSort_Performance() {
+        int[] array = {4,6,77,8,10,3,5,85,91};
+        for (int i = 1; i <= 1000000; i++){
+            array[0] = i;
+            Arrays.sort(array);
+        }
+    }
+
 }
