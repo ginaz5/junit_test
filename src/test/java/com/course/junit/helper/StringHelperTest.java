@@ -18,4 +18,22 @@ public class StringHelperTest {
     public void truncateAInFirst2Positions_AinFirstPosition(){
         assertEquals("CD", helper.truncateAInFirst2Positions("ACD"));
     }
+
+    @Test
+    public void areFirstAndLastTwoCharactersTheSame(){
+        // without inline variable
+        boolean actualValue = helper.areFirstAndLastTwoCharactersTheSame("ABCD");
+        boolean expectedValue = false;
+        assertEquals(expectedValue, actualValue);
+
+        // with inline variable and use assertFalse
+        assertFalse(helper.areFirstAndLastTwoCharactersTheSame("ABCD"));
+        // assertFalse("expected false, but got true", true);
+
+        // Practices
+        assertTrue(helper.areFirstAndLastTwoCharactersTheSame("ABAB"));
+        assertTrue(helper.areFirstAndLastTwoCharactersTheSame("AB"));
+        assertFalse(helper.areFirstAndLastTwoCharactersTheSame("A"));
+
+    }
 }
