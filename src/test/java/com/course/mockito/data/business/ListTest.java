@@ -6,6 +6,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -39,7 +40,21 @@ public class ListTest {
     public void letsMockList_ThrowAnException() {
         List listMock = mock(List.class);
         when(listMock.get(anyInt())).thenThrow(new RuntimeException("Something happened"));
+        when(listMock.subList(anyInt(),5)).thenThrow(new RuntimeException("Something happened"));
+        when(listMock.add(anyInt())).thenReturn(Boolean.TRUE); // Exercise - Mock other method
         listMock.get(0);
+    }
+
+    // Exercise - play around with argument matchers
+    abstract class FlowerService {
+        public abstract boolean isABigFlower(String name, int petals);
+    }
+
+    @Test
+    public void Flower() {
+        FlowerService mock = mock(FlowerService.class);
+        // when(mock.isABigFlower("poppy", anyInt())).thenReturn(true); //Invalid use of argument matchers!
+        when(mock.isABigFlower(eq("poppy"), anyInt())).thenReturn(true);
     }
 
 }
