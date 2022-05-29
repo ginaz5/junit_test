@@ -17,6 +17,25 @@ import static org.mockito.Mockito.*;
 public class TodoBusinessImplMockTest {
 
     @Test
+    public void deleteTodosNotRelatedToSpring_usingBDD() {
+        // Given - setup
+        TodoService todoServiceMock = mock(TodoService.class);
+        List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Spring",
+                "Learn to Dance");
+        given(todoServiceMock.retrieveTodos("Dummy")).willReturn(todos);
+        TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
+
+        // When - actual method call
+        todoBusinessImpl.deleteTodosNotRelatedToSpring("Dummy");
+
+        // Then - asserts
+        verify(todoServiceMock).deleteTodo("Learn to Dance"); // it does call the method with arg string
+        verify(todoServiceMock, times(1)).deleteTodo("Learn to Dance");
+        verify(todoServiceMock, atLeast(1)).deleteTodo("Learn to Dance");
+        verify(todoServiceMock, never()).deleteTodo("Learn Spring MVC"); // not call this method with arg string
+
+    }
+        @Test
     public void retrieveTodosRelatedToSpring_usingBDD() {
         // Given - setup
         TodoService todoServiceMock = mock(TodoService.class);
