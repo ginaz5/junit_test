@@ -7,11 +7,30 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 // cons of using stub - dynamic conditions, it will hard to maintain
 
 public class TodoBusinessImplMockTest {
+
+    @Test
+    public void retrieveTodosRelatedToSpring_usingBDD() {
+        // Given - setup
+        TodoService todoServiceMock = mock(TodoService.class);
+        List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Spring",
+                "Learn to Dance");
+        given(todoServiceMock.retrieveTodos("Dummy")).willReturn(todos);
+        TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
+
+        // When - actual method call
+        List<String> filteredTodos = todoBusinessImpl.retrieveTodosRelatedToSpring("Dummy");
+
+        // Then - asserts
+        assertThat(filteredTodos.size(), is(2));
+    }
 
     @Test
     public void retrieveTodosRelatedToSpring() {

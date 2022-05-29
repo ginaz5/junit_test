@@ -4,9 +4,12 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -55,6 +58,19 @@ public class ListTest {
         FlowerService mock = mock(FlowerService.class);
         // when(mock.isABigFlower("poppy", anyInt())).thenReturn(true); //Invalid use of argument matchers!
         when(mock.isABigFlower(eq("poppy"), anyInt())).thenReturn(true);
+    }
+
+    @Test
+    public void letsMockListGet_usingBDD() {
+        // Given
+        List<String> listMock = mock(List.class);
+        given(listMock.get(anyInt())).willReturn("in28Minutes");
+
+        // When
+        String firstElement = listMock.get(0);
+
+        // Then
+        assertThat(firstElement, is("in28Minutes"));
     }
 
 }
