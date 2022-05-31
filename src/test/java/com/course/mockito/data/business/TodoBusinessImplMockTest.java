@@ -8,6 +8,7 @@ import org.mockito.ArgumentCaptor;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -70,6 +71,8 @@ public class TodoBusinessImplMockTest {
         List<String> expected = Arrays.asList("Learn to Rock & Roll", "Learn to Dance");
         assertEquals(expected, stringArgumentCaptor.getAllValues());
 
+        // use HamcrestMatcher
+        assertThat(expected, hasItems("Learn to Rock & Roll", "Learn to Dance"));
     }
 
         @Test
